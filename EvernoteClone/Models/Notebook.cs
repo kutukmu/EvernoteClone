@@ -9,7 +9,7 @@ namespace EvernoteClone.Models
 {
     public class Notebook
     {
-        [PrimaryKey]
+        [PrimaryKey, AutoIncrement]
         public int Id { get; set; }
         [Indexed]
         public int UserId { get; set; }

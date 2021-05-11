@@ -22,7 +22,7 @@ namespace EvernoteClone.ViewModels.Commands
 
         public bool CanExecute(object parameter)
         {
-            Notebook selectednotebook = parameter as Notebook;
+            var selectednotebook = parameter as Notebook;
             if(selectednotebook != null)
             {
                 return true;

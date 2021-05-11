@@ -10,7 +10,7 @@ namespace EvernoteClone.ViewModels.Helpers
 {
     public class DatabaseHelper
     {
-        private static string path = Path.Combine(Environment.CurrentDirectory, "notedDb.db3");
+        private static string path = Path.Combine(Environment.CurrentDirectory, "notedDb");
 
         public static bool AddItem<T>(T newItem)
         {

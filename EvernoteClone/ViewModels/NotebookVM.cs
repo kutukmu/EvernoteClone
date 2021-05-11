@@ -30,7 +30,7 @@ namespace EvernoteClone.ViewModels
             get { return selectedNotebook; }
             set {
                 selectedNotebook = value;
-
+                OnPropertyChanged("SelectedNotebook");
                 GetNotes();
             }
         }
@@ -58,6 +58,7 @@ namespace EvernoteClone.ViewModels
             Notebooks.Add(newNotebook);
 
             DatabaseHelper.AddItem<Notebook>(newNotebook);
+            GetNoteBooks();
         }
 
         public void CreateNewNote(int id)
@@ -71,6 +72,7 @@ namespace EvernoteClone.ViewModels
             };
 
             DatabaseHelper.AddItem<Note>(newNote);
+            GetNotes();
         }
 
         private void GetNoteBooks()
