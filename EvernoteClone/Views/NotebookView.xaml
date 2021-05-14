@@ -4,7 +4,9 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:EvernoteClone.Views"
+        xmlns:uc="clr-namespace:EvernoteClone.UserControls"
         mc:Ignorable="d"
+        
         xmlns:vm="clr-namespace:EvernoteClone.ViewModels"
         Title="NotebookView" Height="450" Width="600">
     <Window.Resources>
@@ -24,17 +26,22 @@
                     
                 </MenuItem>
             </Menu>
-            <ListView DockPanel.Dock="Left" Width="120" ItemsSource="{Binding Notebooks}" SelectedValue="{Binding SelectedNotebook, Mode=TwoWay}">
+            <StatusBar DockPanel.Dock="Bottom">
+                <StatusBarItem>
+                    <TextBlock x:Name="statusTextBlock"/>
+                </StatusBarItem>
+            </StatusBar>
+            <ListView DockPanel.Dock="Left" Width="120" ItemsSource="{Binding Notebooks}" SelectedValue="{Binding SelectedNotebook, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
                 <ListView.ItemTemplate>
                     <DataTemplate>
-                        <TextBlock Text="{Binding Name}"/>
+                        <uc:DisplayNotebook Notebook="{Binding}"/>
                     </DataTemplate>
                 </ListView.ItemTemplate>
             </ListView>
             <ListView DockPanel.Dock="Left" Width="120" ItemsSource="{Binding Notes}"  >
                 <ListView.ItemTemplate >
                     <DataTemplate>
-                        <TextBlock Text="{Binding Title}"></TextBlock>
+                        <uc:DisplayNote Note="{Binding}"/>
                     </DataTemplate>
                 </ListView.ItemTemplate>
             </ListView>
@@ -42,8 +49,17 @@
                 <ToolBar>
 
                     <Button Content="Speech" Click="Speech_Button_Click"></Button>
+                    <ToggleButton x:Name="Bold_Button" Click="Bold_Button_Click">
+                        <TextBlock Text="B" FontWeight="Bold"/>
+                    </ToggleButton>
+                    <ComboBox Width="100" x:Name="FontFamily_ComboBox" SelectionChanged="FontFamily_ComboBox_SelectionChanged"/>
+                    <ComboBox IsEditable="True" Width="50" x:Name="FontSize_ComboBox" TextBoxBase.TextChanged="FontSize_ComboBox_TextChanged"/>
                 </ToolBar>
             </ToolBarTray>
+            <Grid>
+                <RichTextBox x:Name="contentRichTextbox" TextChanged="contentRichTextbox_TextChanged" SelectionChanged="contentRichTextbox_SelectionChanged"/>
+            </Grid>
+
             
         </DockPanel>
     </Grid>
